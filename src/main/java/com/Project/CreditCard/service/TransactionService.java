@@ -43,6 +43,14 @@ public class TransactionService {
         return dao.getSpendingHistoryByProfession();
     }
 
+    public List<Transaction> getLowValueTransactions(){
+        return dao.getLowValueTransactions();
+    }
+
+    public List<Transaction> getHighValueTransactions(){
+        return dao.getHighValueTransactions();
+    }
+
     @Autowired
     public TransactionService(TransactionRepo _transactionRepo)
     {
