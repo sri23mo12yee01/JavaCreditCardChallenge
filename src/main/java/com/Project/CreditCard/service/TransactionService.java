@@ -1,6 +1,8 @@
 package com.Project.CreditCard.service;
 
 
+import com.Project.CreditCard.dao.TransactionMongoTemplate;
+import com.Project.CreditCard.dto.*;
 import com.Project.CreditCard.entity.Transaction;
 import com.Project.CreditCard.repo.TransactionRepo;
 import com.Project.CreditCard.utility.SpendingCategory;
@@ -13,6 +15,33 @@ import java.util.List;
 public class TransactionService {
 
     private final TransactionRepo transactionRepo;
+
+    @Autowired
+    private TransactionMongoTemplate dao;
+
+    public List<SpendingByGender> getGenderwiseSpending(){
+        return dao.getSpendingHistoryByGender();
+    }
+
+    public List<SpendingByCategory> getCategorywiseSpending(){
+        return dao.getSpendingHistoryByCategory();
+    }
+
+    public List<SpendingByCity> getCitywiseSpending(){
+        return dao.getSpendingHistoryByCity();
+    }
+
+    public List<SpendingByState> getStatewiseSpending(){
+        return dao.getSpendingHistoryByState();
+    }
+
+    public List<SpendingByMerchant> getMerchantwiseSpending(){
+        return dao.getSpendingHistoryByMerchant();
+    }
+
+    public List<SpendingByProfession> getJobwiseSpending(){
+        return dao.getSpendingHistoryByProfession();
+    }
 
     @Autowired
     public TransactionService(TransactionRepo _transactionRepo)

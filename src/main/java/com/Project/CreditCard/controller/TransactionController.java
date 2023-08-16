@@ -1,6 +1,7 @@
 package com.Project.CreditCard.controller;
 
 
+import com.Project.CreditCard.dto.*;
 import com.Project.CreditCard.entity.Transaction;
 import com.Project.CreditCard.service.TransactionService;
 import com.Project.CreditCard.utility.SpendingCategory;
@@ -49,7 +50,42 @@ public class TransactionController {
         return ResponseEntity.created(URI.create("/transactions/"+createdTransaction.getId())).body(createdTransaction);
     }
 
+    // For data visualization (charts) - MongoTemplate
 
+    @GetMapping("/spendingHistory")
+    public List<SpendingByGender> getGenderwiseSpending()
+    {
+        return transactionService.getGenderwiseSpending();
+    }
 
+    @GetMapping("/spendingHistory")
+    public List<SpendingByCategory> getCategorywiseSpending()
+    {
+        return transactionService.getCategorywiseSpending();
+    }
+
+    @GetMapping("/spendingHistory")
+    public List<SpendingByCity> getCitywiseSpending()
+    {
+        return transactionService.getCitywiseSpending();
+    }
+
+    @GetMapping("/spendingHistory")
+    public List<SpendingByState> getStatewiseSpending()
+    {
+        return transactionService.getStatewiseSpending();
+    }
+
+    @GetMapping("/spendingHistory")
+    public List<SpendingByMerchant> getMerchantwiseSpending()
+    {
+        return transactionService.getMerchantwiseSpending();
+    }
+
+    @GetMapping("/spendingHistory")
+    public List<SpendingByProfession> getJobwiseSpending()
+    {
+        return transactionService.getJobwiseSpending();
+    }
 
 }
