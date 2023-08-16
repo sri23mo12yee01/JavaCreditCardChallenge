@@ -88,4 +88,16 @@ public class TransactionController {
         return transactionService.getJobwiseSpending();
     }
 
+    @GetMapping("/spendingHistory")
+    public List<Transaction> getLowValueTransactions()
+    {
+        return transactionService.getLowValueTransactions();
+    }
+
+    @GetMapping("/spendingHistory")
+    public List<Transaction> getHighValueTransactions()
+    {
+        return transactionService.getHighValueTransactions();
+    }
+
 }

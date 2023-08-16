@@ -141,5 +141,23 @@ public class TransactionMongoTemplate {
         return result;
     }
 
+    public List<Transaction> getLowValueTransactions() {
+        MatchOperation matchLowValue = Aggregation.match(Criteria.where("Amount").lte(100));
+        SortOperation sortByAmount = Aggregation.sort(Sort.by("Amount"));
+
+        Aggregation aggregation = Aggregation.newAggregation(matchLowValue, sortByAmount);
+
+        return mongoTemplate.aggregate(aggregation, "transactions", Transaction.class).getMappedResults();
+    }
+
+    public List<Transaction> getHighValueTransactions() {
+        MatchOperation matchHighValue = Aggregation.match(Criteria.where("Amount").gt(100)); // Adjust the threshold as needed
+        SortOperation sortByAmountDescending = Aggregation.sort(Sort.by(Sort.Direction.DESC, "Amount"));
+
+        Aggregation aggregation = Aggregation.newAggregation(matchHighValue, sortByAmountDescending);
+
+        return mongoTemplate.aggregate(aggregation, "transactions", Transaction.class).getMappedResults();
+    }
+
 
 }
