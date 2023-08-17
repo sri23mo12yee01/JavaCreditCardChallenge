@@ -1,6 +1,7 @@
 package com.Project.CreditCard.controller;
 
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.Project.CreditCard.dto.*;
 import com.Project.CreditCard.entity.Transaction;
 import com.Project.CreditCard.service.TransactionService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/transactions")
 public class TransactionController {
@@ -37,7 +39,7 @@ public class TransactionController {
     }
 
     @GetMapping("/category/{spendingCategory}")
-    public ResponseEntity<List<Transaction>> getTransactionsByCategory(@PathVariable SpendingCategory spendingCategory)
+    public ResponseEntity<List<Transaction>> getTransactionsByCategory(@PathVariable String spendingCategory)
     {
         List<Transaction> transactions= transactionService.getTransactionsBySpendingCategory(spendingCategory);
         return ResponseEntity.ok(transactions);
@@ -52,49 +54,50 @@ public class TransactionController {
 
     // For data visualization (charts) - MongoTemplate
 
-    @GetMapping("/spendingHistory")
+    @GetMapping("/spendingHistory/Gender")
     public List<SpendingByGender> getGenderwiseSpending()
     {
         return transactionService.getGenderwiseSpending();
     }
 
-    @GetMapping("/spendingHistory")
+    @GetMapping("/spendingHistory/Category")
     public List<SpendingByCategory> getCategorywiseSpending()
     {
+        System.out.println("In controller");
         return transactionService.getCategorywiseSpending();
     }
 
-    @GetMapping("/spendingHistory")
+    @GetMapping("/spendingHistory/City")
     public List<SpendingByCity> getCitywiseSpending()
     {
         return transactionService.getCitywiseSpending();
     }
 
-    @GetMapping("/spendingHistory")
+    @GetMapping("/spendingHistory/State")
     public List<SpendingByState> getStatewiseSpending()
     {
         return transactionService.getStatewiseSpending();
     }
 
-    @GetMapping("/spendingHistory")
+    @GetMapping("/spendingHistory/Merchant")
     public List<SpendingByMerchant> getMerchantwiseSpending()
     {
         return transactionService.getMerchantwiseSpending();
     }
 
-    @GetMapping("/spendingHistory")
+    @GetMapping("/spendingHistory/Job")
     public List<SpendingByProfession> getJobwiseSpending()
     {
         return transactionService.getJobwiseSpending();
     }
 
-    @GetMapping("/spendingHistory")
+    @GetMapping("/spendingHistory/LowValueTransactions")
     public List<Transaction> getLowValueTransactions()
     {
         return transactionService.getLowValueTransactions();
     }
 
-    @GetMapping("/spendingHistory")
+    @GetMapping("/spendingHistory/HighValueTransactions")
     public List<Transaction> getHighValueTransactions()
     {
         return transactionService.getHighValueTransactions();

@@ -4,6 +4,7 @@ import com.Project.CreditCard.utility.SpendingCategory;
 import com.Project.CreditCard.utility.TransactionStatus;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 @Document(collection="transactions")
@@ -12,20 +13,47 @@ public class Transaction {
     private String id;
     private String userId;
     private String merchant;
+    @Field("amt")
     private double amount;
+
+    private String Job;
+
+    private String city;
+
+    private String state;
+
+    private String gender;
     private Date transactionDate;
     private TransactionStatus status;
-    private SpendingCategory spendingCategory;
+    @Field("category")
+    private String spendingCategory;
 
-    public Transaction(String _id, String _userId, String _merchant, double _amount, Date _transactionDate, TransactionStatus _status, SpendingCategory _spendingCategory) {
-        this.id = _id;
-        this.userId = _userId;
-        this.merchant = _merchant;
-        this.amount = _amount;
-        this.transactionDate = _transactionDate;
-        this.status = _status;
-        this.spendingCategory = _spendingCategory;
+
+
+
+    public Transaction(String id, String userId, String merchant, double amount, String city, String state, String gender, Date transactionDate, TransactionStatus status, String spendingCategory, String job) {
+        this.id = id;
+        this.userId = userId;
+        this.merchant = merchant;
+        this.amount = amount;
+        this.city = city;
+        this.state = state;
+        this.gender = gender;
+        this.transactionDate = transactionDate;
+        this.status = status;
+        this.spendingCategory = spendingCategory;
+        Job = job;
     }
+
+//    public Transaction(String _id, String _userId, String _merchant, double _amount, Date _transactionDate, TransactionStatus _status, String _spendingCategory) {
+//        this.id = _id;
+//        this.userId = _userId;
+//        this.merchant = _merchant;
+//        this.amount = _amount;
+//        this.transactionDate = _transactionDate;
+//        this.status = _status;
+//        this.spendingCategory = _spendingCategory;
+//    }
 
     public String getId() {
         return id;
@@ -75,11 +103,46 @@ public class Transaction {
         this.status = _status;
     }
 
-    public SpendingCategory getSpendingCategory() {
+    public String getSpendingCategory() {
         return spendingCategory;
     }
 
-    public void setSpendingCategory(SpendingCategory _spendingCategory) {
+    public void setSpendingCategory(String _spendingCategory) {
         this.spendingCategory = _spendingCategory;
     }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getJob() {
+        return Job;
+    }
+
+    public void setJob(String job) {
+        Job = job;
+    }
+
 }

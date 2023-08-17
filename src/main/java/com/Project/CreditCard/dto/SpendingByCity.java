@@ -2,15 +2,15 @@ package com.Project.CreditCard.dto;
 
 public class SpendingByCity {
 
-    private String City;
+    private String city;
     private double total_amount;
 
     public String getCity() {
-        return City;
+        return city;
     }
 
     public void setCity(String city) {
-        City = city;
+        this.city = city;
     }
 
     public double getTotal_amount() {

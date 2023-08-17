@@ -2,15 +2,15 @@ package com.Project.CreditCard.dto;
 
 public class SpendingByMerchant {
 
-    private String Merchant;
+    private String merchant;
     private double total_amount;
 
     public String getMerchant() {
-        return Merchant;
+        return merchant;
     }
 
     public void setMerchant(String merchant) {
-        Merchant = merchant;
+        this.merchant = merchant;
     }
 
     public double getTotal_amount() {

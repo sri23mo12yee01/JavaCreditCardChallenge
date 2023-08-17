@@ -20,6 +20,7 @@ public class CustomerService implements ICustomerService{
 
     public List<Customer> getCustomerByGender(String _gender)
     {
+        System.out.println("In customer service");
         return customerRepo.findByGender(_gender);
     }
 
