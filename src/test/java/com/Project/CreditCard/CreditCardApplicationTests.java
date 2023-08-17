@@ -3,18 +3,20 @@ package com.Project.CreditCard;
 import com.Project.CreditCard.entity.Customer;
 import com.Project.CreditCard.repo.CustomerRepo;
 import com.Project.CreditCard.service.CustomerService;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class CreditCardApplicationTests {
@@ -25,12 +27,18 @@ public class CreditCardApplicationTests {
 	@InjectMocks
 	private CustomerService customerService;
 
+	private List<Customer> mockCustomers;
+	private Customer mockCustomer;
+
+	@BeforeEach
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
+		mockCustomers = new ArrayList<>();
+		mockCustomer = new Customer();
+	}
+
 	@Test
 	public void testGetCustomerByGender() {
-		// Create mock data
-		List<Customer> mockCustomers = new ArrayList<>();
-		// Add mock customers to the list
-
 		// Set up mock behavior
 		when(customerRepo.findByGender(any(String.class))).thenReturn(mockCustomers);
 
@@ -43,10 +51,6 @@ public class CreditCardApplicationTests {
 
 	@Test
 	public void testGetCustomerByProfession() {
-		// Create mock data
-		List<Customer> mockCustomers = new ArrayList<>();
-		// Add mock customers to the list
-
 		// Set up mock behavior
 		when(customerRepo.findByProfession(any(String.class))).thenReturn(mockCustomers);
 
@@ -59,10 +63,6 @@ public class CreditCardApplicationTests {
 
 	@Test
 	public void testCreateCustomer() {
-		// Create a mock customer
-		Customer mockCustomer = new Customer();
-		// Set properties of the mock customer
-
 		// Set up mock behavior
 		when(customerRepo.save(any(Customer.class))).thenReturn(mockCustomer);
 
@@ -75,16 +75,13 @@ public class CreditCardApplicationTests {
 
 	@Test
 	public void testUpdateCustomer() {
-		// Create a mock customer
-		Customer mockCustomer = new Customer();
-		// Set properties of the mock customer
-
 		// Set up mock behavior
+		String mockId = "mockId";
 		when(customerRepo.findByCustomerId(any(String.class))).thenReturn(mockCustomer);
 		when(customerRepo.save(any(Customer.class))).thenReturn(mockCustomer);
 
 		// Call the service method
-		Customer result = customerService.updateCustomer("mockId", mockCustomer);
+		Customer result = customerService.updateCustomer(mockId, mockCustomer);
 
 		// Assert the result
 		assertEquals(mockCustomer, result);
@@ -93,16 +90,13 @@ public class CreditCardApplicationTests {
 	@Test
 	public void testDeleteCustomer() {
 		// Set up mock behavior
-		when(customerRepo.findByCustomerId(any(String.class))).thenReturn(new Customer());
+		String mockId = "mockId";
+		when(customerRepo.findByCustomerId(any(String.class))).thenReturn(mockCustomer);
 
 		// Call the service method
-		boolean result = customerService.deleteCustomer("mockId");
+		boolean result = customerService.deleteCustomer(mockId);
 
 		// Assert the result
-		assertTrue(result);
-	}
-
-	@Test
-	void contextLoads() {
+		Assertions.assertTrue(result);
 	}
 }
