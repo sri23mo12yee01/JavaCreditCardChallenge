@@ -2,15 +2,15 @@ package com.Project.CreditCard.dto;
 
 public class SpendingByState {
 
-    private String State;
+    private String state;
     private double total_amount;
 
     public String getState() {
-        return State;
+        return state;
     }
 
     public void setState(String state) {
-        State = state;
+        this.state = state;
     }
 
     public double getTotal_amount() {

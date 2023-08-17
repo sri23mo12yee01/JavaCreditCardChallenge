@@ -10,7 +10,7 @@ public interface TransactionRepo extends MongoRepository<Transaction,String> {
 
     List<Transaction> findByUserId(String userId);
     List<Transaction> findByMerchant(String merchant);
-    List<Transaction> findBySpendingCategory(SpendingCategory spendingCategory);
+    List<Transaction> findBySpendingCategory(String spendingCategory);
 
 
 }

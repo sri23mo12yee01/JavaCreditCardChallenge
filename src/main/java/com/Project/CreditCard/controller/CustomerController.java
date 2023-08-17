@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/customers")
 public class CustomerController {
@@ -23,6 +24,7 @@ public class CustomerController {
     @GetMapping("/gender/{gender}")
     public ResponseEntity<List<Customer>> getCustomersByGender(@PathVariable String gender)
     {
+        System.out.println("In customer controller");
         List<Customer> customers = customerService.getCustomerByGender(gender);
         return ResponseEntity.ok(customers);
     }

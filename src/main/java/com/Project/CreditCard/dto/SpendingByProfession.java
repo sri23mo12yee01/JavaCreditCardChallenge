@@ -10,7 +10,7 @@ public class SpendingByProfession {
     }
 
     public void setJob(String job) {
-        Job = job;
+        this.Job = job;
     }
 
     public double getTotal_amount() {

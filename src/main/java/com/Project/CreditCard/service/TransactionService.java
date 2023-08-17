@@ -24,6 +24,7 @@ public class TransactionService {
     }
 
     public List<SpendingByCategory> getCategorywiseSpending(){
+        System.out.println("In service");
         return dao.getSpendingHistoryByCategory();
     }
 
@@ -66,7 +67,7 @@ public class TransactionService {
         return transactionRepo.findByMerchant(_merchant);
     }
 
-    public List<Transaction> getTransactionsBySpendingCategory(SpendingCategory _spendingCategory)
+    public List<Transaction> getTransactionsBySpendingCategory(String _spendingCategory)
     {
         return transactionRepo.findBySpendingCategory(_spendingCategory);
     }

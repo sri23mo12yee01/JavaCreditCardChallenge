@@ -35,12 +35,12 @@ public class TransactionMongoTemplate {
 
     public List<SpendingByGender> getSpendingHistoryByGender() {
 
-        GroupOperation groupByGender = group("Gender").sum("Amount")
+        GroupOperation groupByGender = group("gender").sum("amt")
                 .as("total_amount");
 
-        MatchOperation allGenderCategory = match(new Criteria("Gender").exists(true));
+        MatchOperation allGenderCategory = match(new Criteria("gender").exists(true));
 
-        ProjectionOperation includes = project("total_amount").and("Gender").previousOperation();
+        ProjectionOperation includes = project("total_amount").and("gender").previousOperation();
 
         SortOperation sortByGender = sort(Sort.by(Sort.Direction.DESC,"total_amount"));
 
@@ -52,31 +52,36 @@ public class TransactionMongoTemplate {
     }
 
     public List<SpendingByCategory> getSpendingHistoryByCategory() {
-
-        GroupOperation groupByCategory = group("Category").sum("Amount")
+        System.out.println("In DAO");
+        GroupOperation groupByCategory = group("category").sum("amt")
                 .as("total_amount");
-
-        MatchOperation allCategories = match(new Criteria("Category").exists(true));
-
-        ProjectionOperation includes = project("total_amount").and("Category").previousOperation();
+        System.out.println("Grouping by category and aggregation on sum of amount");
+        MatchOperation allCategories = match(new Criteria("category").exists(true));
+        System.out.println("Match operation created");
+        ProjectionOperation includes = project("total_amount").and("category").previousOperation();
+        System.out.println("Projection operation created");
 
         SortOperation sortByCategory = sort(Sort.by(Sort.Direction.DESC,"total_amount"));
+        System.out.println("Sort operation created");
 
         Aggregation aggregation = newAggregation(allCategories,groupByCategory,sortByCategory,includes);
         AggregationResults<SpendingByCategory> groupResults = mongoTemplate
                 .aggregate(aggregation, "transactions", SpendingByCategory.class);
+        System.out.println("Aggregation operation created");
+
         List<SpendingByCategory> result = groupResults.getMappedResults();
+        //System.out.println(result);
         return result;
     }
 
     public List<SpendingByMerchant> getSpendingHistoryByMerchant() {
 
-        GroupOperation groupByMerchant = group("Merchant").sum("Amount")
+        GroupOperation groupByMerchant = group("merchant").sum("amt")
                 .as("total_amount");
 
-        MatchOperation allMerchants = match(new Criteria("Merchant").exists(true));
+        MatchOperation allMerchants = match(new Criteria("merchant").exists(true));
 
-        ProjectionOperation includes = project("total_amount").and("Merchant").previousOperation();
+        ProjectionOperation includes = project("total_amount").and("merchant").previousOperation();
 
         SortOperation sortByMerchant = sort(Sort.by(Sort.Direction.DESC,"total_amount"));
 
@@ -89,12 +94,12 @@ public class TransactionMongoTemplate {
 
     public List<SpendingByCity> getSpendingHistoryByCity() {
 
-        GroupOperation groupByCity = group("City").sum("Amount")
+        GroupOperation groupByCity = group("city").sum("amt")
                 .as("total_amount");
 
-        MatchOperation allCities = match(new Criteria("City").exists(true));
+        MatchOperation allCities = match(new Criteria("city").exists(true));
 
-        ProjectionOperation includes = project("total_amount").and("City").previousOperation();
+        ProjectionOperation includes = project("total_amount").and("city").previousOperation();
 
         SortOperation sortByCity = sort(Sort.by(Sort.Direction.DESC,"total_amount"));
 
@@ -107,12 +112,12 @@ public class TransactionMongoTemplate {
 
     public List<SpendingByState> getSpendingHistoryByState() {
 
-        GroupOperation groupByState = group("State").sum("Amount")
+        GroupOperation groupByState = group("state").sum("amt")
                 .as("total_amount");
 
-        MatchOperation allStates = match(new Criteria("State").exists(true));
+        MatchOperation allStates = match(new Criteria("state").exists(true));
 
-        ProjectionOperation includes = project("total_amount").and("State").previousOperation();
+        ProjectionOperation includes = project("total_amount").and("state").previousOperation();
 
         SortOperation sortByState = sort(Sort.by(Sort.Direction.DESC,"total_amount"));
 
@@ -125,7 +130,7 @@ public class TransactionMongoTemplate {
 
     public List<SpendingByProfession> getSpendingHistoryByProfession() {
 
-        GroupOperation groupByJob = group("Job").sum("Amount")
+        GroupOperation groupByJob = group("Job").sum("amt")
                 .as("total_amount");
 
         MatchOperation allJobs = match(new Criteria("Job").exists(true));
@@ -142,8 +147,8 @@ public class TransactionMongoTemplate {
     }
 
     public List<Transaction> getLowValueTransactions() {
-        MatchOperation matchLowValue = Aggregation.match(Criteria.where("Amount").lte(100));
-        SortOperation sortByAmount = Aggregation.sort(Sort.by("Amount"));
+        MatchOperation matchLowValue = Aggregation.match(Criteria.where("amt").lte(100));
+        SortOperation sortByAmount = Aggregation.sort(Sort.by("amt"));
 
         Aggregation aggregation = Aggregation.newAggregation(matchLowValue, sortByAmount);
 
@@ -151,8 +156,8 @@ public class TransactionMongoTemplate {
     }
 
     public List<Transaction> getHighValueTransactions() {
-        MatchOperation matchHighValue = Aggregation.match(Criteria.where("Amount").gt(100)); // Adjust the threshold as needed
-        SortOperation sortByAmountDescending = Aggregation.sort(Sort.by(Sort.Direction.DESC, "Amount"));
+        MatchOperation matchHighValue = Aggregation.match(Criteria.where("amt").gt(100)); // Adjust the threshold as needed
+        SortOperation sortByAmountDescending = Aggregation.sort(Sort.by(Sort.Direction.DESC, "amt"));
 
         Aggregation aggregation = Aggregation.newAggregation(matchHighValue, sortByAmountDescending);
 

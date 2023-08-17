@@ -2,16 +2,16 @@ package com.Project.CreditCard.dto;
 
 public class SpendingByGender {
 
-    private String Gender;
+    private String gender;
     private double total_amount;
 
 
     public String getGender() {
-        return Gender;
+        return gender;
     }
 
-    public void setGender(String Gender) {
-        this.Gender = Gender;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public double getTotal_amount() {

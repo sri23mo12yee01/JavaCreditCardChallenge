@@ -12,8 +12,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CustomerRepo  extends MongoRepository<Customer, ObjectId> {
-
-    List<Customer> findByGender(String Gender);
+    @Query("{gender:'?0'}")
+    List<Customer> findByGender(String gender);
+    @Query("{profession:'?0'}")
     List<Customer> findByProfession(String profession);
 
   @Query("{customerId:'?0'}")

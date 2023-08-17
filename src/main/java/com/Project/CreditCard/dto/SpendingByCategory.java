@@ -2,15 +2,15 @@ package com.Project.CreditCard.dto;
 
 public class SpendingByCategory {
 
-    private String Category;
+    private String category;
     private double total_amount;
 
     public String getCategory() {
-        return Category;
+        return category;
     }
 
     public void setCategory(String category) {
-        Category = category;
+        this.category = category;
     }
 
     public double getTotal_amount() {
