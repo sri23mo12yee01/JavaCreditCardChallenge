@@ -11,13 +11,9 @@ import java.util.Optional;
 
 @Service
 public class CustomerService implements ICustomerService{
-
-    private final CustomerRepo customerRepo;
-    @Autowired
-    public CustomerService(CustomerRepo _customerRepo){
-        this.customerRepo=_customerRepo;
-    }
-
+@Autowired
+private CustomerRepo customerRepo;
+      
     public List<Customer> getCustomerByGender(String _gender)
     {
         System.out.println("In customer service");
