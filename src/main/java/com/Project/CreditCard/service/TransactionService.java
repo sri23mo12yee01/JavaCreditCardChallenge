@@ -14,7 +14,8 @@ import java.util.List;
 @Service
 public class TransactionService {
 
-    private final TransactionRepo transactionRepo;
+    @Autowired
+    private TransactionRepo transactionRepo;
 
     @Autowired
     private TransactionMongoTemplate dao;
